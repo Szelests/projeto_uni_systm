@@ -61,7 +61,16 @@
     "cstdint": "cpp",
     "*.tpp": "cpp",
     "stdexcept": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "ostream": "cpp",
+    "array": "cpp",
+    "memory": "cpp",
+    "format": "cpp",
+    "istream": "cpp",
+    "functional": "cpp",
+    "tuple": "cpp",
+    "utility": "cpp",
+    "variant": "cpp"
   },
   "cmake.sourceDirectory": "D:/mis_proyectos/estudos/UTFPR-Engenharia_Eletronica/tecnicas_prog/projeto_uni_systm/build"
 }

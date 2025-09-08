@@ -21,6 +21,7 @@ add_library(academico_lib
     src/academico/domain/Disciplina.cpp
     src/academico/domain/HistoricoAcademico.cpp
     src/academico/domain/Turma.cpp
+    src/academico/domain/Nota.cpp
 
     # UTILS
     src/utils/string_utils.cpp
@@ -43,12 +44,15 @@ add_subdirectory(libs/cpputest)
 add_executable(run_tests
     tests/main_test_runner.cpp
     tests/academico/domain/pessoas/pessoa_test.cpp 
-    tests/utils/string_utils.cpp 
+    tests/academico/domain/pessoas/aluno_test.cpp 
+    tests/utils/string_utils_test.cpp 
+    tests/utils/lista_test.cpp 
 )
 
 # Informa ao executável de teste onde encontrar os cabeçalhos
 target_include_directories(run_tests PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/includes
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests
     libs/cpputest/include               
 )
 

@@ -1,156 +1,157 @@
 #ifndef __LISTA_HPP__
 #define __LISTA_HPP__
 
-#include <cstddef> // Para size_t
-#include <iostream>
-#include <stdexcept>
+#include <cstddef>   // Para size_t
+#include <stdexcept> // Para std::out_of_range
+#include <ostream>   // Para std::ostream
 #include <algorithm> // Para std::swap
 
 template <typename T>
 class Lista 
 {
 private:
-    T* elementos;
-    size_t capacidade;
-    size_t tamanho;
+    // Adicionado prefixo m_ para membros, como no resto do projeto
+    T* m_elementos;
+    size_t m_capacidade;
+    size_t m_tamanho;
 
     void redimensionar()
     { 
-        capacidade = (capacidade == 0) ? 1 : capacidade * 2;
-        T* novos_elementos = new T[capacidade];
-        for(size_t i = 0; i < tamanho; ++i) // BUG CORRIGIDO: i inicializado
+        // Sua lógica de redimensionamento está ótima
+        m_capacidade = (m_capacidade == 0) ? 10 : m_capacidade * 2;
+        T* novos_elementos = new T[m_capacidade];
+        for(size_t i = 0; i < m_tamanho; ++i)
         {
-            novos_elementos[i] = elementos[i]; // Poderia usar std::move para eficiência
+            // std::move pode ser mais eficiente para objetos complexos
+            novos_elementos[i] = std::move(m_elementos[i]);
         }
-        delete[] elementos;
-        elementos = novos_elementos;
+        delete[] m_elementos;
+        m_elementos = novos_elementos;
     }
 
 public:
     // --- CONSTRUTOR e DESTRUTOR ---
-    Lista(): capacidade(10), tamanho(0)
-    {
-        elementos = new T[capacidade];
-    }
+
+    // OTIMIZAÇÃO: Construtor não aloca memória inicialmente.
+    // Economiza memória para listas que são criadas mas nunca usadas.
+    Lista(): m_elementos(nullptr), m_capacidade(0), m_tamanho(0) {}
 
     ~Lista()
     {
-        delete[] elementos;
+        delete[] m_elementos;
     }
 
-    // --- A "REGRA DOS CINCO" (C++11+) ---
-    // Inclui construtores e operadores de MOVER (move semantics)
-    // Mas vamos focar na Regra dos Três por enquanto.
+    // --- A "REGRA DOS TRÊS" ---
 
-    // Construtor de Cópia
-    Lista(const Lista& original): capacidade(original.capacidade), tamanho(original.tamanho)
+    // Construtor de Cópia: Cria uma cópia profunda do original.
+    Lista(const Lista& original)
+        : m_elementos(new T[original.m_capacidade]),
+          m_capacidade(original.m_capacidade), 
+          m_tamanho(original.m_tamanho)
     {
-        elementos = new T[capacidade];
-        for(size_t i = 0; i < tamanho; ++i) // BUG CORRIGIDO: i inicializado
+        for(size_t i = 0; i < m_tamanho; ++i)
         { 
-            elementos[i] = original.elementos[i];
+            m_elementos[i] = original.m_elementos[i];
         }
     }
 
-    // Operador de Atribuição de Cópia (usando o idioma copy-and-swap para segurança)
-    Lista& operator=(Lista outra) // Recebe por valor para criar uma cópia
+    // Operador de Atribuição de Cópia (idioma copy-and-swap)
+    Lista& operator=(Lista outra)
     {
-        // Troca o conteúdo do objeto atual com o da cópia temporária 'outra'
-        std::swap(this->elementos, outra.elementos);
-        std::swap(this->tamanho, outra.tamanho);
-        std::swap(this->capacidade, outra.capacidade);
+        // Troca os recursos internos com a cópia temporária 'outra'
+        std::swap(this->m_elementos, outra.m_elementos);
+        std::swap(this->m_tamanho, outra.m_tamanho);
+        std::swap(this->m_capacidade, outra.m_capacidade);
         return *this;
-        // A cópia temporária 'outra' é destruída ao sair do escopo, liberando a memória antiga.
     }
 
     // --- MÉTODOS MODIFICADORES ---
     
     void adicionar(const T& elemento)
     {
-        if(tamanho == capacidade)
+        if(m_tamanho == m_capacidade)
         {
             redimensionar();
         }
-        elementos[tamanho] = elemento;
-        tamanho++;
+        m_elementos[m_tamanho++] = elemento;
     }
 
     void remover_ultimo()
     {
-        if(tamanho > 0) 
+        if(m_tamanho > 0) 
         {
-            tamanho--;
+            m_tamanho--;
         }
     }
 
     void remover(size_t indice)
     {
-        if (indice >= tamanho)
+        if (indice >= m_tamanho)
         {
-            throw std::out_of_range("Indice de remoção fora do range!");
+            throw std::out_of_range("Indice de remocao fora do limite!");
         }
         
-        for(size_t i = indice; i < tamanho - 1; ++i) 
+        for(size_t i = indice; i < m_tamanho - 1; ++i) 
         {
-            elementos[i] = elementos[i + 1];
+            m_elementos[i] = m_elementos[i + 1];
         }
-        tamanho--;
+        m_tamanho--;
     }
 
     void limpar()
     {
-        tamanho = 0;
+        m_tamanho = 0;
     }
 
     // --- MÉTODOS DE ACESSO ---
 
     T& operator[](size_t indice)
     {
-        if(indice >= tamanho) 
+        if(indice >= m_tamanho) 
         {
-            throw std::out_of_range("Indice fora do range!");
+            throw std::out_of_range("Indice fora do limite!");
         }
-        return elementos[indice]; 
+        return m_elementos[indice]; 
     }
 
-    // Versão const para acesso a partir de objetos constantes
     const T& operator[](size_t indice) const
     {
-        if(indice >= tamanho) 
+        if(indice >= m_tamanho) 
         {
-            throw std::out_of_range("Indice fora do range!");
+            throw std::out_of_range("Indice fora do limite!");
         }
-        return elementos[indice];
+        return m_elementos[indice];
     }
     
-    size_t getTamanho() const
+    size_t get_tamanho() const
     {
-        return tamanho;
+        return m_tamanho;
     }
 
-    size_t getCapacidade() const
+    // RENOMEADO: getCapacidade -> get_capacidade
+    size_t get_capacidade() const
     {
-        return capacidade;
+        return m_capacidade;
     }
 
-    bool estaVazia() const
+    // RENOMEADO: estaVazia -> esta_vazia
+    bool esta_vazia() const
     {
-        return tamanho == 0;
+        return m_tamanho == 0;
     }
 };
 
-// Sobrecarga do operador << para impressão (melhor prática)
+// Sobrecarga do operador << para impressão
 template <typename T>
 std::ostream& operator<<(std::ostream& os, const Lista<T>& lista)
 {
     os << "[";
-    for (size_t i = 0; i < lista.getTamanho(); ++i)
+    for (size_t i = 0; i < lista.get_tamanho(); ++i) // RENOMEADO: getTamanho -> get_tamanho
     {
-        os << lista[i] << (i == lista.getTamanho() - 1 ? "" : ", ");
+        os << lista[i] << (i == lista.get_tamanho() - 1 ? "" : ", ");
     }
     os << "]";
     return os;
 }
-
 
 #endif // __LISTA_HPP__
