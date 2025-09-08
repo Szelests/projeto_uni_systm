@@ -1,4 +1,7 @@
 #include "academico/domain/pessoas/Pessoa.hpp"
+#include "utils/string_utils.hpp"
+
+using namespace StringUtils;
 
 /**
  * @brief Construtrora
@@ -12,7 +15,9 @@ Pessoa::Pessoa(uint16_t id, const char* nome, const char* cpf)
     // Assignação do nome
     if(nome) 
     {
-        strncpy(m_nome, nome, TAMANHO_MAX_NOME - 1);
+        snprintf(m_nome, TAMANHO_MAX_NOME, "%s", nome);
+        trim(m_nome);
+        reduce_internal_spaces(m_nome);
         
         m_nome[TAMANHO_MAX_NOME - 1] = '\0';
     } else 
@@ -23,7 +28,9 @@ Pessoa::Pessoa(uint16_t id, const char* nome, const char* cpf)
     // Assignação de CPF
     if(cpf) 
     {
-        strncpy(m_cpf, cpf, TAMANHO_MAX_CPF - 1);
+        snprintf(m_cpf, TAMANHO_MAX_CPF, "%s", cpf);
+        trim(m_cpf);
+        reduce_internal_spaces(m_cpf);
 
         m_cpf[TAMANHO_MAX_CPF - 1] = '\0';
     } else 

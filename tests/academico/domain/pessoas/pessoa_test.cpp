@@ -60,7 +60,7 @@ TEST(TestePessoa, TruncamentoDeStringLonga)
     pessoa = new PessoaParaTeste(102, "Pedro de Alcantara Francisco Antonio Joao Carlos", "555.666.777-88");
     
     // O construtor seguro com strncpy deve truncar o nome
-    const char* nome_esperado = "Pedro de Alcantara Francisco"; // Exatamente 29 caracteres
+    const char* nome_esperado = "Pedro de Alcantara Francisco"; // Exatamente 28 caracteres
 
     // ASSERT
     STRCMP_EQUAL(nome_esperado, pessoa->get_nome());
