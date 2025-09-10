@@ -13,11 +13,11 @@ class Aluno : virtual public Pessoa
 private:
     char m_matricula[TAMANHO_MAX_MATRICULA];
     uint16_t m_curso_id;
-    // CORREÇÃO 1: O histórico agora é um ponteiro inteligente para a INTERFACE
+    // O histórico agora é um ponteiro inteligente para a INTERFACE
     std::unique_ptr<IHistoricoAcademico> m_historico;
 
 public:
-    // CORREÇÃO 2: O construtor agora aceita o ponteiro inteligente
+    // O construtor agora aceita o ponteiro inteligente
     Aluno(
         uint32_t id, 
         const char* nome, 
@@ -33,7 +33,7 @@ public:
     
     void adicionar_nota(uint16_t disciplina_id, double valor);
     
-    // CORREÇÃO 3: Adicionado o getter para o ponteiro do histórico
+
     const IHistoricoAcademico* get_historico_ptr() const { return m_historico.get(); }
     IHistoricoAcademico* get_historico_ptr() { return m_historico.get(); }
 

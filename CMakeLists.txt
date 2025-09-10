@@ -45,6 +45,7 @@ add_executable(run_tests
     tests/main_test_runner.cpp
     tests/academico/domain/pessoas/pessoa_test.cpp 
     tests/academico/domain/pessoas/aluno_test.cpp 
+    tests/academico/domain/pessoas/funcionario_test.cpp 
     tests/utils/string_utils_test.cpp 
     tests/utils/lista_test.cpp 
 )

@@ -70,7 +70,8 @@
     "functional": "cpp",
     "tuple": "cpp",
     "utility": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "iostream": "cpp"
   },
   "cmake.sourceDirectory": "D:/mis_proyectos/estudos/UTFPR-Engenharia_Eletronica/tecnicas_prog/projeto_uni_systm/build"
 }

@@ -5,11 +5,13 @@
 
 class Funcionario : virtual public Pessoa 
 {   
-    private:
-        uint32_t m_salario;
+    protected:
+        double m_salario;
 
     public:
-        Funcionario(uint16_t id, const char* nome, const char* cpf, uint32_t salario);
+        Funcionario(uint16_t id, const char* nome, const char* cpf, double salario);
+
+        double get_salario() const;
 
         void exibir_detalhes() const override;
 };

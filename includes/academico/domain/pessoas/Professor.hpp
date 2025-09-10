@@ -1,23 +1,21 @@
 #ifndef __PROFESSOR_HPP__
 #define __PROGFESSOR_HPP__
 
-#include "Pessoa.hpp"
 #include "Funcionario.hpp"
-#include "../utils/Lista.hpp"
+#include "utils/Lista.hpp"
 
-class Professor : public Funcionario 
+class Professor : virtual public Funcionario 
 {
     private:
         uint16_t m_departamento_id;
-        Lista<uint16_t> m_disciplinas_lecionadas;
+        Lista<uint16_t> m_disciplinas_lecionadas_ids;
 
     public: 
         Professor(
         uint16_t id,                    
         const char* nome,           
         const char* cpf,            
-        const char* id_funcional,    
-        uint32_t salario,             
+        double salario,             
         uint16_t departamento_id      
         );
 

@@ -39,7 +39,6 @@ TEST_GROUP(TesteAluno)
 };
 
 // Teste 1: Verifica o construtor e os getters básicos
-// Este teste continua igual e deve funcionar perfeitamente.
 TEST(TesteAluno, ConstrutorInicializaCorretamenteOsAtributos)
 {
     CHECK_EQUAL(101, aluno->get_id());
@@ -50,7 +49,6 @@ TEST(TesteAluno, ConstrutorInicializaCorretamenteOsAtributos)
 }
 
 // Teste 2: Verifica o truncamento da matrícula
-// Este teste também continua válido, mas precisamos recriar o Aluno
 // passando um novo mock.
 TEST(TesteAluno, MatriculaLongaDeveSerTruncada)
 {
@@ -75,7 +73,6 @@ TEST(TesteAluno, SetCursoIdAlteraOCursoCorretamente)
 }
 
 // Teste 4: Verifica se Aluno se comunica corretamente com o Histórico (Mock)
-// Agora este teste é mais complexo e robusto.
 TEST(TesteAluno, AdicionarNotaDelegaCorretamenteParaHistorico)
 {
     // ARRANGE
