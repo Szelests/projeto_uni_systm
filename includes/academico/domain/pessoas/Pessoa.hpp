@@ -16,6 +16,7 @@ class Pessoa
         char m_cpf[TAMANHO_MAX_CPF];
 
     public:
+        Pessoa();
         Pessoa(uint16_t id, const char* nome, const char* cpf);
 
         virtual ~Pessoa() {} 

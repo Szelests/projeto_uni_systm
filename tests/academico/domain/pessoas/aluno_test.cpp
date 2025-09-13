@@ -82,8 +82,6 @@ TEST(TesteAluno, AdicionarNotaDelegaCorretamenteParaHistorico)
     // Precisamos de acesso ao mock para verificar seu estado depois.
     // Primeiro, pegamos o ponteiro para a interface IHistoricoAcademico.
     // É necessário um getter para m_historico na classe Aluno.
-    // Supondo que você adicionou:
-    // const IHistoricoAcademico* get_historico_ptr() const { return m_historico.get(); }
     
     // Como estamos no teste, faremos um cast para ter acesso aos membros do mock.
     // CUIDADO: Este tipo de cast só é seguro porque SABEMOS que injetamos um mock.

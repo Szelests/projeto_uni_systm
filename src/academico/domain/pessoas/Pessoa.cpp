@@ -5,9 +5,6 @@ using namespace StringUtils;
 
 /**
  * @brief Construtrora
- * @param id uint16_t
- * @param name const char*
- * @param cpf const char*
  */
 Pessoa::Pessoa(uint16_t id, const char* nome, const char* cpf)
 : m_id(id)

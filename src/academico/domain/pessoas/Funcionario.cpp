@@ -4,6 +4,9 @@
 #include <iostream>
 #include <cstdint>
 
+/**
+ * @brief Construtora
+ */
 Funcionario::Funcionario(uint16_t id,
     const char* nome,
     const char* cpf,

@@ -9,7 +9,9 @@ class Funcionario : virtual public Pessoa
         double m_salario;
 
     public:
+        Funcionario();
         Funcionario(uint16_t id, const char* nome, const char* cpf, double salario);
+        
 
         double get_salario() const;
 

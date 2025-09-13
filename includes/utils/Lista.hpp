@@ -10,19 +10,16 @@ template <typename T>
 class Lista 
 {
 private:
-    // Adicionado prefixo m_ para membros, como no resto do projeto
     T* m_elementos;
     size_t m_capacidade;
     size_t m_tamanho;
 
     void redimensionar()
     { 
-        // Sua lógica de redimensionamento está ótima
         m_capacidade = (m_capacidade == 0) ? 10 : m_capacidade * 2;
         T* novos_elementos = new T[m_capacidade];
         for(size_t i = 0; i < m_tamanho; ++i)
         {
-            // std::move pode ser mais eficiente para objetos complexos
             novos_elementos[i] = std::move(m_elementos[i]);
         }
         delete[] m_elementos;
@@ -128,13 +125,11 @@ public:
         return m_tamanho;
     }
 
-    // RENOMEADO: getCapacidade -> get_capacidade
     size_t get_capacidade() const
     {
         return m_capacidade;
     }
 
-    // RENOMEADO: estaVazia -> esta_vazia
     bool esta_vazia() const
     {
         return m_tamanho == 0;
